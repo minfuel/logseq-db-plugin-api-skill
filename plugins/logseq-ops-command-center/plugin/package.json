@@ -1,0 +1,25 @@
+{
+  "name": "logseq-ops-command-center",
+  "version": "0.1.0",
+  "description": "Logseq command center for marketplace, inventory, Norwegian workflows, and MCP tool demos",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "logseq": {
+    "id": "logseq-ops-command-center",
+    "title": "Ops Command Center",
+    "description": "Mockable command center for marketplace and inventory workflows"
+  },
+  "dependencies": {
+    "@logseq/libs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0",
+    "vite-plugin-logseq": "^0.3.0"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Marketplace Phone Control (Mock)",
+  "description": "Mock phone-control extension for FINN/Facebook marketplace actions",
+  "version": "0.1.0",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["https://*.finn.no/*", "https://*.facebook.com/*", "http://localhost:8787/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Marketplace Phone Control",
+    "default_popup": "popup.html"
+  }
+}

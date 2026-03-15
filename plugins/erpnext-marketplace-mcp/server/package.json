@@ -1,0 +1,10 @@
+{
+  "name": "erpnext-marketplace-mcp-mock",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Mock MCP server for marketplace, inventory, and compliance workflows",
+  "scripts": {
+    "start": "node src/index.js"
+  }
+}

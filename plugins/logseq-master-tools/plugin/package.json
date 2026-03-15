@@ -1,0 +1,25 @@
+{
+  "name": "logseq-master-tools",
+  "version": "0.1.0",
+  "description": "Master dashboard for browsing, routing, and creating tool workflows inside Logseq",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "logseq": {
+    "id": "logseq-master-tools",
+    "title": "Master Tools",
+    "description": "Browse tool workflows, route tasks, and draft new tools from one place"
+  },
+  "dependencies": {
+    "@logseq/libs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0",
+    "vite-plugin-logseq": "^0.3.0"
+  }
+}

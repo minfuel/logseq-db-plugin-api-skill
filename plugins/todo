@@ -1,0 +1,16 @@
+if logseq is the second brain, this is the visual interface
+
+DONE make a master plugin, when clicked it shows all the tools like indes and also allows me to create new tools. i should say the task and its knows to make new tool or use existing one if i do not want to browse, it should work on logseq itself, not a extention? short answer
+DONE if i add items certain to bookmarks folder it will be added to my logseq to first page, if no page then to a hashtag  with the same name  as the bookmark. all this should have #bookmark tag.
+DONE add so one can add a note w/ images or using camera or screenshot
+
+- add so i have a entertainment tracking place in like another tab or something where i can search or add a movie i am watching or series to be tracked by selecting text or right clicking on either the link or image. after its added i can then just press a button if i am done with movie and adds to episode or season if series
+    - if i want i can navigate to the plugin and click a button that will get all the video title and url of a certain channel (for future ai) or make a playlist using ai with the right ssequence of operation, like if lots of house building videos it shows from start to finish even though creator didnt make a playlist, and released randomly, it will be like a playlist but with the right sequence of videos
+
+
+- checks for items in the #order and the property type is pickup not delivery, meaning we want to purchase it not ordered by customer. if we want to purchase it adds, Compare vendor prices for an item using Prisjakt.no and internal vendor catalog, Suggests cheapest vendor and pulls vendor catalog, and adds them under the block
+- module implements automatic monitoring of marketplace listings (finn.no, Facebook Marketplace)
+and matches them with Material Requests and Tasks that might need those items.
+- Posting of listings e.x 'i want to buy land in sirevag for 450k, will pay for gebyr' on facebook,finn.no
+- 
+

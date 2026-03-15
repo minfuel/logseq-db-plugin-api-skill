@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marketplace Phone Control</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Marketplace Phone Control</h1>
+      <p>Run mock actions against local MCP server.</p>
+
+      <label for="marketplace">Marketplace</label>
+      <select id="marketplace">
+        <option value="finn">FINN</option>
+        <option value="facebook">Facebook</option>
+      </select>
+
+      <label for="action">Action</label>
+      <select id="action">
+        <option value="search">Search</option>
+        <option value="message_seller">Message Seller</option>
+        <option value="add_to_list">Add to List</option>
+      </select>
+
+      <button id="run">Run Action</button>
+      <pre id="output">Ready.</pre>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logseq Quick Capture</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">📝 Quick Capture</div>
+      <div class="header-actions">
+        <button id="bookmarksToggle" class="icon-btn" title="Bookmark sync">🔖</button>
+        <button id="settingsToggle" class="icon-btn" title="Toggle settings">⚙️</button>
+      </div>
+    </header>
+
+    <!-- Settings panel (hidden by default) -->
+    <div id="settingsPanel" class="settings-panel hidden">
+      <div class="field">
+        <label for="apiPort">Logseq HTTP Server Port</label>
+        <input type="number" id="apiPort" placeholder="12315" />
+      </div>
+      <div class="field">
+        <label for="authToken">
+          Auth Token
+          <span class="hint">Logseq → Settings → Advanced → HTTP Server</span>
+        </label>
+        <input type="password" id="authToken" placeholder="Leave blank if not set" />
+      </div>
+      <div class="field">
+        <label for="targetPage">
+          Target Page
+          <span class="hint">Type "journal" to send to today's journal</span>
+        </label>
+        <input type="text" id="targetPage" placeholder="Inbox" />
+      </div>
+      <div class="field">
+        <label for="defaultTags">
+          Default Tags
+          <span class="hint">Comma-separated, no # prefix</span>
+        </label>
+        <input type="text" id="defaultTags" placeholder="QuickCapture" />
+      </div>
+      <div class="field">
+        <label for="ytApiKey">
+          YouTube API Key
+          <span class="hint">Google Cloud Console → YouTube Data API v3</span>
+        </label>
+        <input type="password" id="ytApiKey" placeholder="AIza…" />
+      </div>
+      <div class="field">
+        <label for="openAiKey">
+          OpenAI API Key
+          <span class="hint">platform.openai.com → API Keys (for AI playlist)</span>
+        </label>
+        <input type="password" id="openAiKey" placeholder="sk-…" />
+      </div>
+      <button id="saveSettings" class="btn-primary">Save Settings</button>
+      <div id="settingsStatus" class="status"></div>
+    </div>
+
+    <!-- Bookmarks Sync panel -->
+    <div id="bookmarksPanel" class="settings-panel hidden">
+      <p class="section-desc">Bookmarks added to a watched folder are automatically sent to the Logseq page matching the folder’s name, tagged <code>#bookmark</code>.</p>
+
+      <div class="field">
+        <label for="folderSelect">Watch a bookmark folder</label>
+        <div class="folder-add-row">
+          <select id="folderSelect"><option value="">Loading folders…</option></select>
+          <button id="addFolderBtn" class="btn-secondary">Add</button>
+        </div>
+      </div>
+
+      <div id="watchedFoldersList" class="folders-list">
+        <div class="empty-hint">No folders watched yet.</div>
+      </div>
+      <div id="bookmarksStatus" class="status"></div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="notes">📝 Notes</button>
+      <button class="tab-btn" data-tab="entertainment">🎬 Watch</button>
+      <button class="tab-btn" data-tab="youtube">▶️ YouTube</button>
+    </nav>
+
+    <!-- ── Notes tab ──────────────────────────────────────────────────────── -->
+    <div id="tab-notes" class="tab-panel">
+      <div id="pendingBanner" class="pending-banner hidden">
+        <span id="pendingCount">0</span> note(s) queued (Logseq offline)
+        <button id="syncNow" class="btn-link">Sync now</button>
+      </div>
+
+      <textarea
+        id="noteContent"
+        placeholder="What's on your mind?&#10;&#10;Ctrl+Enter / ⌘+Enter to send"
+        rows="5"
+        autofocus
+      ></textarea>
+
+      <div class="img-toolbar">
+        <button id="attachFileBtn" class="img-tool-btn" title="Attach image file">📎 File</button>
+        <button id="cameraBtn"     class="img-tool-btn" title="Take photo">📷 Camera</button>
+        <button id="screenshotBtn" class="img-tool-btn" title="Screenshot current tab">📸 Screenshot</button>
+        <input type="file" id="fileInput" accept="image/*" class="hidden" />
+      </div>
+
+      <div id="imgPreviewStrip" class="img-preview-strip hidden"></div>
+
+      <div id="cameraOverlay" class="camera-overlay hidden">
+        <video id="cameraVideo" autoplay playsinline></video>
+        <div class="camera-controls">
+          <button id="capturePhotoBtn" class="btn-primary">📷 Capture</button>
+          <button id="closeCameraBtn"  class="btn-secondary">Cancel</button>
+        </div>
+        <canvas id="cameraCanvas" class="hidden"></canvas>
+      </div>
+
+      <div class="options-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="isTodo" />
+          <span>Mark as TODO</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label for="noteTags">Tags</label>
+        <input type="text" id="noteTags" placeholder="tag1, tag2" />
+      </div>
+
+      <div class="actions">
+        <button id="sendBtn" class="btn-primary">
+          <span id="sendBtnText">Send to Logseq</span>
+        </button>
+      </div>
+
+      <div id="statusMsg" class="status"></div>
+    </div><!-- /tab-notes -->
+
+    <!-- ── Entertainment tab ──────────────────────────────────────────────── -->
+    <div id="tab-entertainment" class="tab-panel hidden">
+      <div id="entPendingCapture" class="pending-banner hidden">
+        📌 Right-click capture ready
+        <button id="fillFromCapture" class="btn-link">Fill form</button>
+      </div>
+
+      <div class="ent-search-row">
+        <input type="text" id="entSearch" placeholder="Search titles…" />
+        <button id="entAddBtn" class="btn-secondary">+ Add</button>
+      </div>
+
+      <div class="ent-filter-row">
+        <button class="ent-filter active" data-filter="all">All</button>
+        <button class="ent-filter" data-filter="watching">Watching</button>
+        <button class="ent-filter" data-filter="plan">Plan</button>
+        <button class="ent-filter" data-filter="done">Done</button>
+      </div>
+
+      <div id="entAddForm" class="ent-form hidden">
+        <div class="field">
+          <label for="entTitle">Title</label>
+          <input type="text" id="entTitle" placeholder="Movie or series name" />
+        </div>
+        <div class="options-row">
+          <label class="checkbox-label">
+            <input type="radio" name="entType" value="movie" checked />
+            <span>🎬 Movie</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="radio" name="entType" value="series" />
+            <span>📺 Series</span>
+          </label>
+        </div>
+        <div id="entSeriesFields" class="hidden">
+          <div class="options-row" style="margin-top:8px">
+            <div class="field" style="flex:1">
+              <label for="entSeason">Season</label>
+              <input type="number" id="entSeason" value="1" min="1" />
+            </div>
+            <div class="field" style="flex:1;margin-left:8px">
+              <label for="entEpisode">Episode</label>
+              <input type="number" id="entEpisode" value="1" min="1" />
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="entUrl">URL (optional)</label>
+          <input type="url" id="entUrl" placeholder="https://…" />
+        </div>
+        <div class="field">
+          <label for="entStatus">Status</label>
+          <select id="entStatus">
+            <option value="watching">▶️ Watching</option>
+            <option value="plan">📋 Plan to Watch</option>
+          </select>
+        </div>
+        <input type="hidden" id="entEditId" value="" />
+        <div class="ent-form-actions">
+          <button id="entSaveBtn"   class="btn-primary">Save</button>
+          <button id="entCancelBtn" class="btn-secondary">Cancel</button>
+        </div>
+        <div id="entFormStatus" class="status"></div>
+      </div>
+
+      <div id="entList" class="ent-list"></div>
+    </div><!-- /tab-entertainment -->
+
+    <!-- ── YouTube tab ────────────────────────────────────────────────────── -->
+    <div id="tab-youtube" class="tab-panel hidden">
+      <p class="section-desc" style="margin-bottom:10px">Fetch all videos from a YouTube channel.<br />Set API keys in <strong>⚙️ Settings</strong>.</p>
+
+      <div class="field">
+        <label for="ytChannel">Channel URL or @handle</label>
+        <input type="text" id="ytChannel" placeholder="@channelname or youtube.com/@channel" />
+      </div>
+      <div class="actions" style="margin-top:10px">
+        <button id="ytFetchBtn" class="btn-primary">Fetch Videos</button>
+      </div>
+      <div id="ytStatus" class="status"></div>
+
+      <div id="ytResults" class="hidden">
+        <div class="yt-results-header">
+          <span id="ytVideoCount" class="yt-count"></span>
+          <div class="yt-result-actions">
+            <button id="ytCopyBtn"   class="btn-secondary">📋 Copy</button>
+            <button id="ytLogseqBtn" class="btn-secondary">📥 Logseq</button>
+            <button id="ytAiBtn"     class="btn-secondary">🤖 AI Order</button>
+          </div>
+        </div>
+        <div id="ytVideoList" class="yt-video-list"></div>
+      </div>
+    </div><!-- /tab-youtube -->
+
+  </div><!-- /container -->
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,7 +1,6 @@
 ---
-name: logseq-db-plugin-api
-version: 2.1.0
-description: Essential knowledge for developing Logseq plugins for DB (database) graphs. Covers core APIs, event-driven updates with DB.onChanged, multi-layered tag detection, property value iteration, advanced query patterns (tag inheritance, or-join), and production-tested plugin architecture patterns. References production-validated code from logseq-checklist v1.0.0.
+name: skill
+description: Essential knowledge for developing Logseq plugins for DB (database) graphs. Covers core APIs, event-driven updates with DB.onChanged, multi-layered tag detection, property value iteration, advanced query patterns (tag inheritance, or-join), production-tested plugin architecture patterns, and MCP-oriented marketplace/inventory workflow design.
 ---
 
 # Logseq DB Plugin API Skill
@@ -84,6 +83,11 @@ Tag/class management, page/block creation, property operations, icons, utilities
 Query syntax, common patterns, caching strategies, tag inheritance with or-join, :block/title vs :block/name.
 
 **Search for**: `datascriptQuery`, `datalog`, `caching`, `query patterns`, `or-join`, `tag inheritance`, `:logseq.property.class/extends`
+
+**[MCP Marketplace and Inventory Workflows](./references/mcp-marketplace-inventory-workflows.md)** - Full plugin blueprint
+Implementation blueprint for hybrid Logseq plugin + browser extension + MCP server workflows. Includes tool contracts for marketplace listing, inventory capture, Norwegian compliance workflows, technical standards docs, and GitHub asset import.
+
+**Search for**: `post_to_marketplace`, `quick_add_item_from_camera`, `manage_skatteetaten_submissions`, `create_s1000d_data_module`, `import_github_repos_as_assets`
 
 ### Troubleshooting
 
