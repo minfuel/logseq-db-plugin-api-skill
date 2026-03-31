@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Master Tools icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ecfdf5" />
+      <stop offset="100%" stop-color="#ccfbf1" />
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bg)" stroke="#5eead4" stroke-width="2" />
+  <text x="32" y="42" text-anchor="middle" font-size="30" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif">&#x1F9F0;</text>
+</svg>

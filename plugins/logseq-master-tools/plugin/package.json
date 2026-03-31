@@ -10,7 +10,7 @@
   },
   "logseq": {
     "id": "logseq-master-tools",
-    "icon": "🧰",
+    "icon": "icon.svg",
     "title": "Master Tools",
     "description": "Browse tool workflows, route tasks, and draft new tools from one place"
   },

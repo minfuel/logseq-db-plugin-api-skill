@@ -2,7 +2,7 @@
   "name": "logseq-image-bg-remover",
   "version": "0.1.0",
   "description": "Remove image backgrounds locally from selected Logseq blocks",
-  "main": "dist/index.html",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
@@ -10,7 +10,7 @@
   },
   "logseq": {
     "id": "logseq-image-bg-remover",
-    "icon": "✂️",
+    "icon": "icon.svg",
     "title": "Image BG Remover",
     "description": "Remove image backgrounds locally for images in selected blocks"
   },
