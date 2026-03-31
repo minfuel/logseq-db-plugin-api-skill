@@ -10,6 +10,7 @@
   },
   "logseq": {
     "id": "logseq-quick-capture",
+    "icon": "📥",
     "title": "Quick Capture",
     "description": "Slash commands and inbox shortcuts for quick note capture"
   },

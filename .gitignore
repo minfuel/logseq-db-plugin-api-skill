@@ -11,3 +11,8 @@
 # Temp files
 *.tmp
 *.bak
+dist
+node_modules
+build
+logs
+*.log

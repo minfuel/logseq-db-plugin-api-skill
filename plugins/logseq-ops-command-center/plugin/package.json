@@ -10,6 +10,7 @@
   },
   "logseq": {
     "id": "logseq-ops-command-center",
+    "icon": "🖥️",
     "title": "Ops Command Center",
     "description": "Mockable command center for marketplace and inventory workflows"
   },

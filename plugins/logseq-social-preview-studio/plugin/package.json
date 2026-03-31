@@ -1,7 +1,7 @@
 {
-  "name": "logseq-master-tools",
+  "name": "logseq-social-preview-studio",
   "version": "0.1.0",
-  "description": "Master dashboard for browsing, routing, and creating tool workflows inside Logseq",
+  "description": "Create multi-platform social and ad preview cards inside Logseq",
   "main": "dist/index.js",
   "scripts": {
     "dev": "vite",
@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "logseq": {
-    "id": "logseq-master-tools",
-    "icon": "🧰",
-    "title": "Master Tools",
-    "description": "Browse tool workflows, route tasks, and draft new tools from one place"
+    "id": "logseq-social-preview-studio",
+    "icon": "🎨",
+    "title": "Social Preview Studio",
+    "description": "Generate preview cards for Instagram, Snapchat, Facebook, YouTube, TikTok, AdSense, and more"
   },
   "dependencies": {
     "@logseq/libs": "^0.3.0"
